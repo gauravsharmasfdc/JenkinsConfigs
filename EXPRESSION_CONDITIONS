@@ -19,6 +19,17 @@ pipeline {
                 echo "Building for ${params.ENVIRONMENT} environment"
             }
         }
+        stage('Test') {
+            when {
+                expression {
+                    return params.ENVIRONMENT == 'qa'
+                }
+            }
+            steps {
+                // Add your testing steps here
+                echo "Testing in ${params.ENVIRONMENT} environment"
+            }
+        }
         stage('Deploy') {
             when {
                 expression {
@@ -29,17 +40,6 @@ pipeline {
             steps {
                 // Add your deployment steps here
                 echo "Deploying to ${params.ENVIRONMENT} environment"
-            }
-        }
-        stage('Test') {
-            when {
-                expression {
-                    return params.ENVIRONMENT == 'qa'
-                }
-            }
-            steps {
-                // Add your testing steps here
-                echo "Testing in ${params.ENVIRONMENT} environment"
             }
         }
     }
