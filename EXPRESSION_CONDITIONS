@@ -9,6 +9,11 @@ pipeline {
     }
     stages {
         stage('Build') {
+            when {
+                expression {
+                    return params.ENVIRONMENT == 'dev'
+                }
+            }
             steps {
                 // Add your build steps here
                 echo "Building for ${params.ENVIRONMENT} environment"
@@ -18,7 +23,7 @@ pipeline {
             when {
                 expression {
                     // You can use the 'params.ENVIRONMENT' variable to make decisions in your pipeline
-                    return params.ENVIRONMENT == 'qa' || params.ENVIRONMENT == 'prod'
+                    return params.ENVIRONMENT == 'prod'
                 }
             }
             steps {
@@ -27,6 +32,11 @@ pipeline {
             }
         }
         stage('Test') {
+            when {
+                expression {
+                    return params.ENVIRONMENT == 'qa'
+                }
+            }
             steps {
                 // Add your testing steps here
                 echo "Testing in ${params.ENVIRONMENT} environment"
