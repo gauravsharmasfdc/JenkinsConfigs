@@ -5,15 +5,15 @@ pipeline {
             steps {
                 echo 'Hello World'
             }
-        }
-        stage('Stage 2') {
-            steps {
-                echo 'Hello World'
-            }
             post {
                 always {
                     echo 'Post action after Stage 2 step complete'
                 }
+            }
+        }
+        stage('Stage 2') {
+            steps {
+                echo 'Hello World'
             }
         }
     }
