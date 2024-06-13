@@ -18,6 +18,12 @@ pipeline {
         }
     }
     post {
+        success {
+            echo 'whole pipeline successful'
+        }
+        failure {
+            echo 'pipeline failed, at least one step failed'
+        }
         always {
             echo 'I will always say Hello again!, After all steps completed'
         }
